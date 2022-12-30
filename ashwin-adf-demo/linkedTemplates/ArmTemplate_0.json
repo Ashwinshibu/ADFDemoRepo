@@ -507,6 +507,22 @@
 						"typeProperties": {
 							"waitTimeInSeconds": 10
 						}
+					},
+					{
+						"name": "Wait2",
+						"type": "Wait",
+						"dependsOn": [
+							{
+								"activity": "Data flow1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 10
+						}
 					}
 				],
 				"policy": {
