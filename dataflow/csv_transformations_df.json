@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "csvtransformation"
+				},
+				{
+					"dataset": {
+						"referenceName": "textfile_ds",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [
@@ -57,6 +64,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> csvtransformation",
+				"source(output(",
+				"          Roll_no as string,",
+				"          Student_name as string,",
+				"          Mobile as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
 				"csvtransformation filter(year(year)<1950) ~> filteroutdates",
 				"filteroutdates derive(yearOnly = year(year)) ~> yearofdate",
 				"yearofdate sort(asc(passengers, true)) ~> sortwithpassengers",
