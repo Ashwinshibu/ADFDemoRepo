@@ -1,0 +1,9 @@
+{
+	"name": "ashwin-adf-demo",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0ddaa935-eb29-495c-8e0c-fa3fa7cacae7",
+		"tenantId": "55962d3e-9807-47ee-8b2e-5daf71d3c425"
+	}
+}

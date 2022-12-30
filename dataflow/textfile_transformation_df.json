@@ -1,0 +1,63 @@
+{
+	"name": "textfile_transformation_df",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "textfile_ds",
+						"type": "DatasetReference"
+					},
+					"name": "textfilesource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "alterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Roll_no as integer,",
+				"          Student_name as string,",
+				"          Mobile as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> textfilesource",
+				"textfilesource alterRow(upsertIf(greater(Roll_no,1001))) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Roll_no as integer,",
+				"          Student_name as string,",
+				"          Mobile as string",
+				"     ),",
+				"     deletable:true,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['Roll_no'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Roll_no,",
+				"          Student_name,",
+				"          Mobile",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
