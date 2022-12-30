@@ -1,0 +1,63 @@
+{
+	"name": "textToCsvConversion",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "textSourceForcsv",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "parse1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empID as integer,",
+				"          empName as string,",
+				"          skills as string,",
+				"          address as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(empID = toInteger(empID)) ~> derivedColumn1",
+				"derivedColumn1 parse(parseSkills = skills ? (skill1 as string,",
+				"          skill2 as string,",
+				"          skill3 as string),",
+				"     format: 'delimited',",
+				"     columnNamesAsHeader: false,",
+				"     columnDelimiter: '|',",
+				"     nullValue: '') ~> parse1",
+				"parse1 sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1,",
+				"     mapColumn(",
+				"          empID,",
+				"          empName,",
+				"          skill1 = parseSkills.skill1,",
+				"          skill2 = parseSkills.skill2,",
+				"          skill3 = parseSkills.skill3",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
