@@ -8,6 +8,9 @@
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
+		"ashwinsqlDb_connectionString": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://ashwinadlsgen2demo.dfs.core.windows.net"
 		},
