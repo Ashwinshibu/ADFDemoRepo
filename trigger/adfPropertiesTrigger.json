@@ -1,0 +1,24 @@
+{
+	"name": "adfPropertiesTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "populatepropertiesinsqldb",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2023-01-03T09:50:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
