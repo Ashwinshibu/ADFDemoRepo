@@ -2,7 +2,7 @@
 	"name": "adfPropertiesTrigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -15,8 +15,8 @@
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Day",
-				"interval": 15,
-				"startTime": "2023-01-03T15:24:00Z",
+				"interval": 1,
+				"startTime": "2023-01-03T15:26:00Z",
 				"timeZone": "UTC"
 			}
 		}
